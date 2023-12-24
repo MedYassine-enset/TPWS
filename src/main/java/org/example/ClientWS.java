@@ -1,0 +1,26 @@
+package org.example;
+
+import proxy.BanqueService;
+import proxy.BanqueWs;
+import proxy.Compte;
+
+import java.util.List;
+
+
+public class ClientWS {
+    public static void main(String[] args) {
+            BanqueService proxy = new BanqueWs().getBanqueServicePort();
+            System.out.println("Convertir un montant = "+proxy.conversionEuroToDH(11));
+            Compte cp = proxy.getCompte(5);
+            System.out.println("Code="+cp.getCode());
+            System.out.println("Solde="+cp.getSolde());
+            System.out.println("Date Création="+cp.getDateCreation());
+            List<Compte> compteList = proxy.listComptes();
+            for (Compte c : compteList){
+                System.out.println("*****************************");
+                System.out.println("Code="+c.getCode());
+                System.out.println("Solde="+c.getSolde());
+                System.out.println("Date Création="+c.getDateCreation());
+            }
+    }
+}
